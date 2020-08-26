@@ -1,0 +1,3 @@
+[submodule "data/dataset_lidar2D_legs"]
+	path = data/dataset_lidar2D_legs
+	url = git@github.com:PouceHeure/dataset_lidar2D_legs.git
