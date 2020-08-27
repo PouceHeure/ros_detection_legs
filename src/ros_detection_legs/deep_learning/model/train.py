@@ -7,14 +7,13 @@ import tensorflow as tf
 from tensorflow import keras 
 
 PATH_FILE_CURRENT = os.path.dirname(os.path.realpath(__file__))
-PATH_FOLDER_DATA = os.path.join(PATH_FILE_CURRENT,"../../data/")
+PATH_FOLDER_DATA = os.path.join(PATH_FILE_CURRENT,"../../../data/")
 PATH_FOLDER_DATA_PROCESSED = os.path.join(PATH_FOLDER_DATA,"processed/")
 
 
-def load_data(file_path): 
+def load_data(file_path,length_fill = 50): 
     X = []
     y = []
-    n = 50
     with open(file_path, newline='') as csvfile:
         spamreader = csv.reader(csvfile, delimiter=',', quotechar='|')
         for row in spamreader:
@@ -22,7 +21,7 @@ def load_data(file_path):
             points = []
             for point in row[1:]: 
                 points.append(list(map(float,point.split("%"))))
-            points += [[0,0]]*(n-len(points)) #+ points
+            points += [[0,0]]*(length_fill-len(points)) #+ points
             X.append(points)
     return np.array(X),np.array(y,dtype=np.int) 
             

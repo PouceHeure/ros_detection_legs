@@ -5,7 +5,7 @@ import csv
 import matplotlib.pyplot as plt 
 
 PATH_FILE_CURRENT = os.path.dirname(os.path.realpath(__file__))
-PATH_FOLDER_DATA = os.path.join(PATH_FILE_CURRENT,"../../../data/")
+PATH_FOLDER_DATA = os.path.join(PATH_FILE_CURRENT,"../../../../data/")
 PATH_FOLDER_DATA_PROCESSED = os.path.join(PATH_FOLDER_DATA,"processed/")
 PATH_FOLDER_DATASET_LIDAR = os.path.join(PATH_FOLDER_DATA,"dataset_lidar2D_legs/")
 PATH_FOLDER_DATASET_LIDAR_50cm = os.path.join(PATH_FOLDER_DATASET_LIDAR,"50cm/")
@@ -79,6 +79,12 @@ class Cluster:
         if(type == "train"):
             self._label = self._define_type(gamma)
 
+    def to_array(self):
+        array = []
+        for p in self._points: 
+            array.append([p.theta,p.r])
+        return array 
+
 
 class LidarData: 
     
@@ -87,6 +93,12 @@ class LidarData:
 
         self._points = []
         self._clusters = []
+
+    def get_points(self):
+        return self._points
+
+    def get_clusters(self):
+        return self._clusters
 
     def load_data_from_csv(self,file_path): 
         points = []
@@ -111,9 +123,6 @@ class LidarData:
                 selected = int(row[2])
             points.append(PointPolar(theta,r,selected))
         self._points = points
-
-    def get_points(self):
-        return self._points
 
     def processing(self,epsilon=1,gamma=0.8,limit_jump=5,limit_radius=0.5): 
         self._clusters = []
