@@ -5,7 +5,7 @@ import csv
 import matplotlib.pyplot as plt 
 
 PATH_FILE_CURRENT = os.path.dirname(os.path.realpath(__file__))
-PATH_FOLDER_DATA = os.path.join(PATH_FILE_CURRENT,"../../../../data/")
+PATH_FOLDER_DATA = os.path.join(PATH_FILE_CURRENT,"../../../../../data/")
 PATH_FOLDER_DATA_PROCESSED = os.path.join(PATH_FOLDER_DATA,"processed/")
 PATH_FOLDER_DATASET_LIDAR = os.path.join(PATH_FOLDER_DATA,"dataset_lidar2D_legs/")
 PATH_FOLDER_DATASET_LIDAR_50cm = os.path.join(PATH_FOLDER_DATASET_LIDAR,"50cm/")
@@ -54,7 +54,8 @@ class Cluster:
         return self._label
 
     def add(self,point):
-        self._points.append(point)
+        if(point.r != 0):
+            self._points.append(point)
 
     def _compute_center(self): 
         theta_sum = 0

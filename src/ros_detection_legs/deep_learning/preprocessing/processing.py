@@ -15,8 +15,8 @@ def keep_proportion(X,y):
     new_y = []
     number_y0_added = 0
     for i in range(len(X)): 
-        if(len(X[i]) < 50):
-            if(y[i] == 1 or (y[i] == 0 and number_y0_added < 2*number_y_to_1)):
+        if(len(X[i]) < 30):
+            if(y[i] == 1 or (y[i] == 0 and number_y0_added < 6*number_y_to_1)):
                 new_X.append(X[i])
                 new_y.append(y[i]) 
                 number_y0_added += 1-y[i] 
