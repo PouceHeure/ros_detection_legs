@@ -9,7 +9,6 @@ def load_paths_files(folder_root):
             paths_files.append(file_path)
     return paths_files
 
-
 def keep_proportion(X,y): 
     number_y_to_1 = y.count(1)
     new_X = []
@@ -23,7 +22,6 @@ def keep_proportion(X,y):
                 number_y0_added += 1-y[i] 
 
     return new_X,new_y
-
 
 def create_dataset_train(folder_in,file_out):
     paths_files = load_paths_files(folder_in) 
