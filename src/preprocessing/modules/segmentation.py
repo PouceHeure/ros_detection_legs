@@ -4,14 +4,11 @@ import csv
 
 import matplotlib.pyplot as plt 
 
-
-
 PATH_FILE_CURRENT = os.path.dirname(os.path.realpath(__file__))
-PATH_FOLDER_DATA = os.path.join(PATH_FILE_CURRENT,"../../data/")
+PATH_FOLDER_DATA = os.path.join(PATH_FILE_CURRENT,"../../../data/")
 PATH_FOLDER_DATA_PROCESSED = os.path.join(PATH_FOLDER_DATA,"processed/")
 PATH_FOLDER_DATASET_LIDAR = os.path.join(PATH_FOLDER_DATA,"dataset_lidar2D_legs/")
 PATH_FOLDER_DATASET_LIDAR_50cm = os.path.join(PATH_FOLDER_DATASET_LIDAR,"50cm/")
-
 
 class PointPolar: 
 
@@ -50,6 +47,12 @@ class Cluster:
     def get_points(self):
         return self._points
 
+    def get_center(self):
+        return self._center
+
+    def get_label(self):
+        return self._label
+
     def add(self,point):
         self._points.append(point)
 
@@ -71,18 +74,21 @@ class Cluster:
             return 1
         return 0 
 
-    def update_information(self,gamma): 
-        self.center = self._compute_center()
-        self.label = self._define_type(gamma)
+    def update_information(self,gamma,type="train"): 
+        self._center = self._compute_center()
+        if(type == "train"):
+            self._label = self._define_type(gamma)
 
 
-class FileData: 
+class LidarData: 
     
-    def __init__(self,file_path,file_type="train"): 
-        self._points = self._load_data(file_path,file_type)
+    def __init__(self,type="train"): 
+        self._type = type
+
+        self._points = []
         self._clusters = []
 
-    def _load_data(self,file_path,file_type): 
+    def load_data_from_csv(self,file_path): 
         points = []
         with open(file_path, newline='') as csvfile:
             spamreader = csv.reader(csvfile, delimiter=',', quotechar='|')
@@ -90,10 +96,21 @@ class FileData:
                 theta = float(row[0])
                 r = float(row[1])
                 selected = None
-                if(file_type == "train"): 
+                if(self._type == "train"): 
                     selected = int(row[2])
                 points.append(PointPolar(theta,r,selected))
-        return points
+        self._points = points
+
+    def load_data_from_array(self,array):
+        points = [] 
+        for row in array:
+            theta = float(row[0])
+            r = float(row[1])
+            selected = None
+            if(self._type == "train"): 
+                selected = int(row[2])
+            points.append(PointPolar(theta,r,selected))
+        self._points = points
 
     def get_points(self):
         return self._points
@@ -121,7 +138,7 @@ class FileData:
                     else: 
                         i += 1 
                         points_jump += 1 
-                current_cluster.update_information(gamma)
+                current_cluster.update_information(gamma,self._type)
 
     def generate_dataset(self,type="train"):
         X = []
@@ -131,8 +148,8 @@ class FileData:
             for p in cluster._points: 
                 points.append("%".join(list(map(str,[p.theta,p.r]))))
             X.append(points)
-            if(type == "train"):
-                y.append(cluster.label)
+            if(self._type == "train"):
+                y.append(cluster.get_label())
         return X,y
 
     def plot_clusters(self): 
@@ -145,7 +162,7 @@ class FileData:
                 thetas.append(p.theta)
                 rs.append(p.r)
             alpha=0.1
-            if(cluster.label == 1): 
+            if(cluster.get_label() == 1): 
                 alpha = 1
             ax.scatter(thetas,rs,alpha=alpha)
         plt.show()
@@ -153,52 +170,3 @@ class FileData:
     def __repr__(self):
         return str(self._points)
 
-
-def load_paths_files(folder_root):
-    paths_files = []
-    for file_name in os.listdir(folder_root): 
-        file_path = os.path.join(folder_root, file_name)
-        if os.path.isfile(file_path) and ".csv" in file_name:
-            paths_files.append(file_path)
-    return paths_files
-
-
-def keep_proportion(X,y): 
-    number_y_to_1 = y.count(1)
-    new_X = []
-    new_y = []
-    number_y0_added = 0
-    for i in range(len(X)): 
-        if(len(X[i]) < 50):
-            if(y[i] == 1 or (y[i] == 0 and number_y0_added < 2*number_y_to_1)):
-                new_X.append(X[i])
-                new_y.append(y[i]) 
-                number_y0_added += 1-y[i] 
-
-    return new_X,new_y
-
-
-def create_dataset_train(folder_in,file_out):
-    paths_files = load_paths_files(folder_in) 
-    X = []
-    y = []
-    for path in paths_files: 
-        filedata = FileData(path,file_type="train")
-        filedata.processing(epsilon=0.5,gamma=0.8,limit_jump=20,limit_radius=0.30)
-        X_, y_ = filedata.generate_dataset(type="train")
-        X += X_
-        y += y_
-
-    X,y = keep_proportion(X,y)
-
-    with open(file_out, 'w', newline='') as csvfile:
-            spamwriter = csv.writer(csvfile, delimiter=',', quoting=csv.QUOTE_MINIMAL)
-            for i in range(len(X)): 
-                spamwriter.writerow([y[i]] + X[i])
-        
-
-    
-
-
-if __name__ == "__main__":  
-    create_dataset_train(PATH_FOLDER_DATASET_LIDAR_50cm,os.path.join(PATH_FOLDER_DATA_PROCESSED,"train.csv"))
