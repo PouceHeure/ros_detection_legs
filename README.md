@@ -9,6 +9,7 @@
   - [Architecture](#architecture)
     - [Extract data](#extract-data)
     - [Preprocessing data](#preprocessing-data)
+      - [original data](#original-data)
       - [segmentation](#segmentation)
     - [Prediction](#prediction)
 
@@ -41,10 +42,10 @@ $ python3 src/training.py
 $ catkin build ros_detection_legs
 ```
 
-2. run detector_nodes 
+2. run [detector_node](./nodes/detecor_node.py) 
 ```
 # source devel before
-$ rosrun ros_detection_legs detector_node
+$ rosrun ros_detection_legs detector_node.py
 ```
 
 ## Architecture
@@ -57,6 +58,9 @@ $ rosrun ros_detection_legs detector_node
 ### Preprocessing data
 
 ![graph_processing](.doc/graph/prepocessing.png)
+
+#### original data 
+
 
 #### segmentation
 
