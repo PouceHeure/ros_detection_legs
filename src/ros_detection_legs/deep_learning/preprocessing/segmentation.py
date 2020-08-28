@@ -5,7 +5,7 @@ import csv
 import matplotlib.pyplot as plt 
 
 PATH_FILE_CURRENT = os.path.dirname(os.path.realpath(__file__))
-PATH_FOLDER_DATA = os.path.join(PATH_FILE_CURRENT,"../../../../../data/")
+PATH_FOLDER_DATA = os.path.join(PATH_FILE_CURRENT,"../../../../data/")
 PATH_FOLDER_DATA_PROCESSED = os.path.join(PATH_FOLDER_DATA,"processed/")
 PATH_FOLDER_DATASET_LIDAR = os.path.join(PATH_FOLDER_DATA,"dataset_lidar2D_legs/")
 PATH_FOLDER_DATASET_LIDAR_50cm = os.path.join(PATH_FOLDER_DATASET_LIDAR,"50cm/")
@@ -47,17 +47,15 @@ class Cluster:
     def get_points(self):
         return self._points
 
-    def get_center(self):
-        return self._center
-
     def get_label(self):
         return self._label
 
     def add(self,point):
+        # keep only point with r > 0 
         if(point.r != 0):
             self._points.append(point)
 
-    def _compute_center(self): 
+    def compute_center(self): 
         theta_sum = 0
         r_sum = 0 
         n = len(self._points)*1.
@@ -76,7 +74,6 @@ class Cluster:
         return 0 
 
     def update_information(self,gamma,type="train"): 
-        self._center = self._compute_center()
         if(type == "train"):
             self._label = self._define_type(gamma)
 
@@ -85,7 +82,6 @@ class Cluster:
         for p in self._points: 
             array.append([p.theta,p.r])
         return array 
-
 
 class LidarData: 
     
@@ -125,7 +121,7 @@ class LidarData:
             points.append(PointPolar(theta,r,selected))
         self._points = points
 
-    def processing(self,epsilon=1,gamma=0.8,limit_jump=5,limit_radius=0.5): 
+    def processing(self,limite_distance=1,limit_cluster_valid=0.8,limit_jump=5,limit_radius=0.5): 
         self._clusters = []
         points = self._points
         while(len(points) != 0): 
@@ -141,14 +137,14 @@ class LidarData:
                     p_compare = points[i]
                     distance = PointPolar.COMPUTE_DISTANCE(p,p_compare)
                     radius_delta = PointPolar.COMPUTE_RADIUS(p,p_compare)
-                    if(distance < epsilon and radius_delta < limit_radius): 
+                    if(distance < limite_distance and radius_delta < limit_radius): 
                         points_jump = 0 
                         current_cluster.add(p_compare)
                         points.remove(p_compare)
                     else: 
                         i += 1 
                         points_jump += 1 
-                current_cluster.update_information(gamma,self._type)
+                current_cluster.update_information(limit_cluster_valid,self._type)
 
     def generate_dataset(self,type="train"):
         X = []

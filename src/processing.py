@@ -1,5 +1,7 @@
+import os 
+import csv
 
-from modules.segmentation import *  
+from ros_detection_legs.deep_learning.preprocessing.segmentation import LidarData, PATH_FOLDER_DATASET_LIDAR_50cm, PATH_FOLDER_DATA_PROCESSED
 
 def load_paths_files(folder_root):
     paths_files = []
@@ -9,14 +11,14 @@ def load_paths_files(folder_root):
             paths_files.append(file_path)
     return paths_files
 
-def keep_proportion(X,y): 
+def keep_proportion(X,y,coeff=5): 
     number_y_to_1 = y.count(1)
     new_X = []
     new_y = []
     number_y0_added = 0
     for i in range(len(X)): 
         if(len(X[i]) < 30):
-            if(y[i] == 1 or (y[i] == 0 and number_y0_added < 6*number_y_to_1)):
+            if(y[i] == 1 or (y[i] == 0 and number_y0_added < coeff*number_y_to_1)):
                 new_X.append(X[i])
                 new_y.append(y[i]) 
                 number_y0_added += 1-y[i] 
@@ -30,7 +32,7 @@ def create_dataset_train(folder_in,file_out):
     for path in paths_files: 
         filedata = LidarData(type="train")
         filedata.load_data_from_csv(path)
-        filedata.processing(epsilon=0.5,gamma=0.8,limit_jump=20,limit_radius=0.30)
+        filedata.processing(limite_distance=0.5,limit_cluster_valid=0.8,limit_jump=20,limit_radius=0.30)
         X_, y_ = filedata.generate_dataset(type="train")
         X += X_
         y += y_
