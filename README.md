@@ -1,6 +1,7 @@
 # ros_detection_legs 
 
 - [ros_detection_legs](#ros_detection_legs)
+  - [Goal](#goal)
   - [Use](#use)
     - [Deep-learning](#deep-learning)
       - [prepocessing data](#prepocessing-data)
@@ -12,6 +13,12 @@
       - [original data](#original-data)
       - [segmentation](#segmentation)
     - [Prediction](#prediction)
+
+
+## Goal 
+Extract legs position from lidar data, like this: 
+
+![screen_radar](.doc/img/screen-radar.png)
 
 ## Use
 
@@ -48,6 +55,18 @@ $ catkin build ros_detection_legs
 $ rosrun ros_detection_legs detector_node.py
 ```
 
+3. use [ros_pygame_radar2D](https://github.com/PouceHeure/ros_pygame_radar_2D)
+```
+# clone project to workspace
+$ git clone https://github.com/PouceHeure/ros_pygame_radar_2D
+
+# compile package 
+$ catkin build ros_pygame_radar_2D
+
+# run radar_node.py 
+$ rosrun ros_pygame_radar_2D radar_node.py
+```
+
 ## Architecture
 
 ### Extract data
@@ -60,6 +79,7 @@ $ rosrun ros_detection_legs detector_node.py
 ![graph_processing](.doc/graph/prepocessing.png)
 
 #### original data 
+
 
 
 #### segmentation
