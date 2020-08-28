@@ -32,7 +32,7 @@ run prepocessing script:
 ```
 $ python3 src/preprocessing.py
 ```
-once run data are stored in **./data/data/train/**
+once run data are stored in **./data/train/**
 
 #### train model
 
