@@ -1,0 +1,13 @@
+{
+    "prepocessing": {
+        "limit_distance": 0.2,
+        "limit_cluster_valid": 0.95,
+        "limit_jump": 50,
+        "limit_radius": 0.20,
+        "limit_length_data": 30
+    }, 
+    "training": {
+        "patience": 10, 
+        "epochs": 150
+    }
+}

@@ -3,16 +3,17 @@ import rospy
 import tensorflow as tf
 import numpy as np 
 
-from ros_detection_legs.deep_learning.preprocessing import segmentation
+from ros_detection_legs.deep_learning.libpreprocessing import segmentation
+from ros_detection_legs.deep_learning.config import loader
 from ros_pygame_radar_2D.msg import PointPolar, RadarPointCloud
 from sensor_msgs.msg import LaserScan
 
 class Detector: 
 
-    def __init__(self,topic_scan,topic_radar,model,tolerance=0.8,length_fill=50):
+    def __init__(self,topic_scan,topic_radar,model,tolerance=0.90):
         self._model = model 
+        self._config_parameters = loader.load_parameters()["prepocessing"]
         self._tolerance = tolerance
-        self._length_fill = length_fill
         self._sub = rospy.Subscriber(topic_scan, LaserScan, self.callback, queue_size=10)
         self._pub = rospy.Publisher(topic_radar, RadarPointCloud, queue_size=10)
 
@@ -29,19 +30,23 @@ class Detector:
         # get process data 
         lidar_data = segmentation.LidarData(type="prod")
         lidar_data.load_data_from_array(points)
-        lidar_data.processing(limite_distance=0.5,limit_cluster_valid=0.8,limit_jump=20,limit_radius=0.30)
+        lidar_data.processing(limit_distance=self._config_parameters["limit_distance"]
+                            ,limit_cluster_valid=self._config_parameters["limit_cluster_valid"]
+                            ,limit_jump=self._config_parameters["limit_jump"]
+                            ,limit_radius=self._config_parameters["limit_radius"])
         
         # get clusters (points segmented)
         clusters = lidar_data.get_clusters()
         clusters_points = []
 
         # predict 
+        length_fill = self._config_parameters["limit_length_data"]
         for cluster in clusters: 
             points = cluster.to_array()
-            if(len(points) <= self._length_fill):
-                clusters_points.append(cluster.to_array() + [[0,0]] * (self._length_fill-len(points)))
+            if(len(points) <= length_fill):
+                clusters_points.append(cluster.to_array() + [[0,0]] * (length_fill-len(points)))
             else: 
-                clusters_points.append([[0,0]] * self._length_fill)
+                clusters_points.append([[0,0]] * length_fill)
         
         # extract legs localisation 
         msg = RadarPointCloud()

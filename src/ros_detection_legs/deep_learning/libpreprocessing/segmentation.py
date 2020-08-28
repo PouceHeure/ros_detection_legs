@@ -121,7 +121,7 @@ class LidarData:
             points.append(PointPolar(theta,r,selected))
         self._points = points
 
-    def processing(self,limite_distance=1,limit_cluster_valid=0.8,limit_jump=5,limit_radius=0.5): 
+    def processing(self,limit_distance=1,limit_cluster_valid=0.8,limit_jump=5,limit_radius=0.5): 
         self._clusters = []
         points = self._points
         while(len(points) != 0): 
@@ -137,7 +137,7 @@ class LidarData:
                     p_compare = points[i]
                     distance = PointPolar.COMPUTE_DISTANCE(p,p_compare)
                     radius_delta = PointPolar.COMPUTE_RADIUS(p,p_compare)
-                    if(distance < limite_distance and radius_delta < limit_radius): 
+                    if(distance < limit_distance and radius_delta < limit_radius): 
                         points_jump = 0 
                         current_cluster.add(p_compare)
                         points.remove(p_compare)
