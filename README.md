@@ -117,6 +117,6 @@ A ros node, **detector_node** subscribes to **/scan** topic. Once data are pusbl
 
 ![graph_prediction](.doc/graph/prediction_ros.png)
 
-Like the training, data need to be clear processed. So before prediction clusters are created, directly in the subscriber callback function. 
+Like the training, data need to be tranformed. So before prediction clusters are created, directly in the subscriber callback function. 
 
 ![graph_prediction](.doc/graph/prediction.png)
