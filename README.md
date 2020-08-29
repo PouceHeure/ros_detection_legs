@@ -10,7 +10,6 @@
   - [Architecture](#architecture)
     - [Extract data](#extract-data)
     - [Preprocessing data](#preprocessing-data)
-      - [original data](#original-data)
       - [segmentation](#segmentation)
     - [Prediction](#prediction)
 
@@ -71,22 +70,38 @@ $ rosrun ros_pygame_radar_2D radar_node.py
 
 ### Extract data
 - package: **ros_lidar_recorder** https://github.com/PouceHeure/ros_lidar_recorder
+- data labeling tool: **lidar_tool_label** https://github.com/PouceHeure/lidar_tool_label
 - dataset: https://github.com/PouceHeure/dataset_lidar2D_legs
+
 ![graph_data_acquisition](.doc/graph/data_acquisition.png)
 
 ### Preprocessing data
 
-![graph_processing](.doc/graph/prepocessing.png)
+This schema defined princpals steps: 
 
-#### original data 
+![graph_processing](.doc/graph/prepocessing_steps.png)
 
-
+We can create clusters with a segmentation, by this way data will gathering if there are closed. 
 
 #### segmentation
+
+Before segmentation, we have to found how to compute a distance between 2 polar points. 
+
+First approach, convert all polar points to cartesien and apply a classic norm. 
+
+Second approach, convert 2 points from polar coordinates to cartesien coordinates and find an expression of distance with theta and r. 
+
+![distance(p1,p2) = \sqrt{r_1^2*r_2^2 - 2*_1*r_2*cos(\theta_1-\theta_2)}](.doc/equation/eq_distance.svg)
 
 ![graph_segmenation](.doc/graph/segmentation.png)
 
 ### Prediction
+
+A ros node, **detector_node** subscribes to **/scan** topic. Once data are pusblished to this topic, the node uses the training model to predict legs position. 
+
+![graph_prediction](.doc/graph/prediction_ros.png)
+
+Like the training, data need to be clear processed. So before prediction clusters are created, directly in the subscriber callback function. 
 
 ![graph_prediction](.doc/graph/prediction.png)
 
