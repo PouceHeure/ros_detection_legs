@@ -8,7 +8,6 @@
 ![tag:language:python3](https://raw.githubusercontent.com/PouceHeure/markdown_tags/v1.0/tags/language/python3/python3_blue.png)
 ![tag:lib:tensorflow](https://raw.githubusercontent.com/PouceHeure/markdown_tags/v1.0/tags/lib/tensorflow/tensorflow_blue.png)
 
-
 - [ros_detection_legs](#ros_detection_legs)
   - [Goal](#goal)
   - [Use](#use)
@@ -86,19 +85,19 @@ $ rosrun ros_pygame_radar_2D radar_node.py
 
 ### Preprocessing data
 
-This schema defined princpals steps: 
+This schema defines princpals steps: 
 
 ![graph_processing](.doc/graph/prepocessing_steps.png)
 
-We can create clusters with a segmentation, by this way data will gathering if there are closed. 
+We can create clusters with a segmentation method, by this way data will gathering if there are closed. 
 
 #### segmentation
 
-Before segmentation, we have to found how to compute a distance between 2 polar points. 
+Before segmentation, we have to found a way how to compute a distance between 2 polar points. 
 
-First approach, convert all polar points to cartesien and apply a classic norm. 
+- First approach, convert all polar points to cartesien and apply a classic norm. 
 
-Second approach, convert 2 points from polar coordinates to cartesien coordinates and find an expression of distance with theta and r. 
+- Second approach, find a general expression from polar point to cartesien distance. 
 
 ![distance(p1,p2) = \sqrt{r_1^2*r_2^2 - 2*_1*r_2*cos(\theta_1-\theta_2)}](.doc/equation/eq_distance.svg)
 
@@ -106,7 +105,7 @@ A second distance is computed:
 
 ![distance_{radius}(p1,p2) = abs(r_1 - r_2)](.doc/equation/eq_distance_radius.svg)
 
-Once we have define compute expression, we have to define hyper-parameters:  
+Once expressions are defined, we have to define hyper-parameters:  
 
 - **limit_distance** 
 - **limit_radius**
@@ -121,7 +120,7 @@ more information about LSTM: https://www.tensorflow.org/api_docs/python/tf/keras
 
 ### Prediction
 
-A ros node, **detector_node** subscribes to **/scan** topic. Once data are pusblished to this topic, the node uses the training model to predict legs position. Legs positions are published to **/radar** topic. 
+A ros node, **detector_node** subscribes to **/scan** topic. Once data are pusblished to this topic, the node uses the training model to predict legs positions. Legs positions are published to **/radar** topic. 
 
 ![graph_prediction](.doc/graph/prediction_ros.png)
 
