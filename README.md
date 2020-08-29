@@ -93,11 +93,20 @@ Second approach, convert 2 points from polar coordinates to cartesien coordinate
 
 ![distance(p1,p2) = \sqrt{r_1^2*r_2^2 - 2*_1*r_2*cos(\theta_1-\theta_2)}](.doc/equation/eq_distance.svg)
 
+A second distance is computed: 
+
+![distance_{radius}(p1,p2) = abs(r_1 - r_2)](.doc/equation/eq_distance_radius.svg)
+
+Once we have define compute expression, we have to define hyper-parameters:  
+
+- **limit_distance** 
+- **limit_radius**
+
 ![graph_segmenation](.doc/graph/segmentation.png)
 
 ### Prediction
 
-A ros node, **detector_node** subscribes to **/scan** topic. Once data are pusblished to this topic, the node uses the training model to predict legs position. 
+A ros node, **detector_node** subscribes to **/scan** topic. Once data are pusblished to this topic, the node uses the training model to predict legs position. Legs positions are published to **/radar** topic. 
 
 ![graph_prediction](.doc/graph/prediction_ros.png)
 
