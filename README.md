@@ -23,7 +23,7 @@
     - [Prediction](#prediction)
 
 ## Goal 
-Extract legs position from lidar data, like this: 
+Extract legs positions from lidar data, like this: 
 
 ![screen_radar](.doc/img/screen-radar.png)
 
