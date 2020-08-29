@@ -1,11 +1,11 @@
 # ros_detection_legs 
 
-![tag:status:status_developpement](https://raw.githubusercontent.com/PouceHeure/markdown_tags/master/tags/status/status_developpement.png)
+![tag:status:status:development](https://raw.githubusercontent.com/PouceHeure/markdown_tags/v1.0/tags/status/status_development/status_development_red.png)
 
-![tag:category:robotic](https://raw.githubusercontent.com/PouceHeure/markdown_tags/master/tags/category/robotic.png)
-![tag:category:deep-learning](https://raw.githubusercontent.com/PouceHeure/markdown_tags/master/tags/category/deep-learning.png)
-![tag:lib:ROS](https://raw.githubusercontent.com/PouceHeure/markdown_tags/master/tags/lib/ROS.png)
-![tag:lib:tensorflow](https://raw.githubusercontent.com/PouceHeure/markdown_tags/master/tags/lib/tensorflow.png)
+![tag:category:deep-learning](https://raw.githubusercontent.com/PouceHeure/markdown_tags/v1.0/tags/category/deep-learning/deep-learning_blue.png)
+![tag:category:robotic](https://raw.githubusercontent.com/PouceHeure/markdown_tags/v1.0/tags/category/robotic/robotic_blue.png)
+![tag:lib:ROS](https://raw.githubusercontent.com/PouceHeure/markdown_tags/v1.0/tags/lib/ROS/ROS_blue.png)
+![tag:language:python3](https://raw.githubusercontent.com/PouceHeure/markdown_tags/v1.0/tags/language/python3/python3_blue.png)
 
 - [ros_detection_legs](#ros_detection_legs)
   - [Goal](#goal)
