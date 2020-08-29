@@ -1,5 +1,11 @@
 # ros_detection_legs 
 
+![tag:status:development](https://raw.githubusercontent.com/PouceHeure/markdown_tags/master/tags/status/development.png)
+
+![tag:cat:robotic](https://raw.githubusercontent.com/PouceHeure/markdown_tags/master/tags/cat/robotic.png)
+![tag:cat:deep-learning](https://raw.githubusercontent.com/PouceHeure/markdown_tags/master/tags/cat/deep-learning.png)
+![tag:lib:ros](https://raw.githubusercontent.com/PouceHeure/markdown_tags/master/tags/lib/ros.png)
+
 - [ros_detection_legs](#ros_detection_legs)
   - [Goal](#goal)
   - [Use](#use)
@@ -13,7 +19,6 @@
       - [segmentation](#segmentation)
     - [Training](#training)
     - [Prediction](#prediction)
-
 
 ## Goal 
 Extract legs position from lidar data, like this: 
