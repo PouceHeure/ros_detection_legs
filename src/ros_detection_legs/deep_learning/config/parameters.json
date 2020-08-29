@@ -6,6 +6,7 @@
         "limit_radius": 0.20,
         "limit_length_data": 30
     }, 
+    
     "training": {
         "patience": 10, 
         "epochs": 150

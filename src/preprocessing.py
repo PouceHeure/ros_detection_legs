@@ -51,4 +51,6 @@ def create_dataset_train(folder_in,file_out):
 
 
 if __name__ == "__main__":  
-    create_dataset_train(PATH_FOLDER_DATASET_LIDAR_50cm,os.path.join(PATH_FOLDER_DATA_PROCESSED,"train.csv"))
+    create_dataset_train(PATH_FOLDER_DATASET_LIDAR_50cm,
+                        os.path.join(PATH_FOLDER_DATA_PROCESSED,
+                        "train.csv"))
