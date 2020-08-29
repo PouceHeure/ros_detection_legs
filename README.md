@@ -11,6 +11,7 @@
     - [Extract data](#extract-data)
     - [Preprocessing data](#preprocessing-data)
       - [segmentation](#segmentation)
+    - [Training](#training)
     - [Prediction](#prediction)
 
 
@@ -24,7 +25,7 @@ Extract legs position from lidar data, like this:
 ### Deep-learning
 
 :warning: a model is already training, saved in **./model/** folder 
-
+:pencil: if you want to change some parameters, please update [./src/ros_detection_legs/deep_learning/config/parameters.json](./src/ros_detection_legs/deep_learning/config/parameters.json)
 #### prepocessing data
 
 run prepocessing script: 
@@ -104,6 +105,12 @@ Once we have define compute expression, we have to define hyper-parameters:
 
 ![graph_segmenation](.doc/graph/segmentation.png)
 
+### Training 
+
+model used: RNN with LSTM cells. 
+
+more information about LSTM: https://www.tensorflow.org/api_docs/python/tf/keras/layers/LSTM
+
 ### Prediction
 
 A ros node, **detector_node** subscribes to **/scan** topic. Once data are pusblished to this topic, the node uses the training model to predict legs position. Legs positions are published to **/radar** topic. 
@@ -113,4 +120,3 @@ A ros node, **detector_node** subscribes to **/scan** topic. Once data are pusbl
 Like the training, data need to be clear processed. So before prediction clusters are created, directly in the subscriber callback function. 
 
 ![graph_prediction](.doc/graph/prediction.png)
-
