@@ -5,6 +5,7 @@
 ![tag:category:robotic](https://raw.githubusercontent.com/PouceHeure/markdown_tags/master/tags/category/robotic.png)
 ![tag:category:deep-learning](https://raw.githubusercontent.com/PouceHeure/markdown_tags/master/tags/category/deep-learning.png)
 ![tag:lib:ROS](https://raw.githubusercontent.com/PouceHeure/markdown_tags/master/tags/lib/ROS.png)
+![tag:lib:tensorflow](https://raw.githubusercontent.com/PouceHeure/markdown_tags/master/tags/lib/tensorflow.png)
 
 - [ros_detection_legs](#ros_detection_legs)
   - [Goal](#goal)
