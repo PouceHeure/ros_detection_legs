@@ -38,8 +38,9 @@ class Cluster:
     
     COUNTER_ID = 0
 
-    def __init__(self): 
+    def __init__(self,label=None): 
         self._points = []
+        self._label = label
 
         self.id = Cluster.COUNTER_ID
         Cluster.COUNTER_ID += 1 
@@ -139,6 +140,7 @@ class LidarData:
                     radius_delta = PointPolar.COMPUTE_RADIUS(p,p_compare)
                     if(distance < limit_distance and radius_delta < limit_radius): 
                         points_jump = 0 
+                        p = p_compare
                         current_cluster.add(p_compare)
                         points.remove(p_compare)
                     else: 
@@ -172,6 +174,21 @@ class LidarData:
                 alpha = 1
             ax.scatter(thetas,rs,alpha=alpha)
         plt.show()
+
+    def incrase_positive_data(self, angles):
+        import copy
+        current_cluster = copy.copy(self._clusters)
+        for cluster in current_cluster: 
+            if(cluster.get_label() == 1):
+                for angle in angles:
+                    new_cluster = Cluster(label=1)
+                    for point in cluster.get_points(): 
+                        theta = math.copysign(1, point.theta) * ((abs(point.theta) + angle) % math.pi)
+                        r = point.r 
+                        new_cluster.add(PointPolar(theta,r))
+                    self._clusters.append(new_cluster)
+            
+
 
     def __repr__(self):
         return str(self._points)

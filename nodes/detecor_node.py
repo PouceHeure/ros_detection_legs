@@ -52,13 +52,13 @@ class Detector:
         msg = RadarPointCloud()
         y = model.predict(clusters_points)
         
-        indices_valid_y = np.where(y >= self._tolerance)[0]
+        indices_valid_y = np.where(y >= self._config_parameters["limit_cluster_valid"])[0]
         for indice in indices_valid_y: 
             point = clusters[indice].compute_center()
             point_msg = PointPolar() 
-            point_msg.theta = point.theta 
+            point_msg.theta = -1 * point.theta #+ np.pi  
             point_msg.r = point.r 
-            msg.points.append(point)
+            msg.points.append(point_msg)
 
         # publish 
         self._pub.publish(msg)

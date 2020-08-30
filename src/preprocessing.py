@@ -1,5 +1,6 @@
 import os 
 import csv
+import math 
 
 from ros_detection_legs.deep_learning.libpreprocessing.segmentation import LidarData, PATH_FOLDER_DATASET_LIDAR_50cm, PATH_FOLDER_DATA_PROCESSED
 from ros_detection_legs.deep_learning.config import loader
@@ -34,15 +35,24 @@ def create_dataset_train(folder_in,file_out):
     for path in paths_files: 
         filedata = LidarData(type="train")
         filedata.load_data_from_csv(path)
+
         filedata.processing(limit_distance=parameters_config["limit_distance"],
                             limit_cluster_valid=parameters_config["limit_cluster_valid"],
                             limit_jump=parameters_config["limit_jump"],
                             limit_radius=parameters_config["limit_radius"])
+        
+        filedata.incrase_positive_data([math.pi/32,
+                                        math.pi/16,
+                                        math.pi/8,
+                                        math.pi/4])
+        #filedata.plot_clusters()
         X_, y_ = filedata.generate_dataset(type="train")
         X += X_
         y += y_
 
-    X,y = keep_proportion(X,y,limit_length_data=parameters_config["limit_length_data"])
+    X,y = keep_proportion(X,y
+                    ,coeff=parameters_config["coeff_label_0"]
+                    ,limit_length_data=parameters_config["limit_length_data"])
 
     with open(file_out, 'w', newline='') as csvfile:
             spamwriter = csv.writer(csvfile, delimiter=',', quoting=csv.QUOTE_MINIMAL)
