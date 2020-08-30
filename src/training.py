@@ -57,7 +57,7 @@ if __name__ == "__main__":
             ,batch_size=32
             ,callbacks=[cb_early_stopping])
 
-    model.save(os.path.join(PATH_FILE_CURRENT,"../../model","train"))
+    model.save(os.path.join(PATH_FILE_CURRENT,"../model","train"))
 
     index_select = 0
     length = 10
