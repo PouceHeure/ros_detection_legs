@@ -28,10 +28,9 @@
 ## goal 
 Extract legs positions from lidar data, like this: 
 
-<!-- [![youtube_presentation](https://img.youtube.com/vi/KcfxU6_UrOo/0.jpg)](https://www.youtube.com/watch?v=KcfxU6_UrOo) -->
+[![youtube_presentation](./.doc/img/screen-video.png)](https://www.youtube.com/watch?v=KcfxU6_UrOo)
 
-<iframe width="560" height="315" src="https://www.youtube.com/embed/KcfxU6_UrOo" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-
+ 
 https://www.youtube.com/watch?v=KcfxU6_UrOo
 
 ## use
