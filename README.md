@@ -122,7 +122,7 @@ We can raise positive data by applying a rotation on these data.
 
 ![graph_raising](.doc/graph/raising.png)
 
-All positive
+All positive clusters are selected, on each cluster the same tranformation is applied on each point.  
 
 The transformation is done by this expression: 
 
