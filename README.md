@@ -8,7 +8,6 @@
 ![tag:language:python3](https://raw.githubusercontent.com/PouceHeure/markdown_tags/v1.0/tags/language/python3/python3_blue.png)
 ![tag:lib:tensorflow](https://raw.githubusercontent.com/PouceHeure/markdown_tags/v1.0/tags/lib/tensorflow/tensorflow_blue.png)
 
-
 - [ros_detection_legs](#ros_detection_legs)
   - [goal](#goal)
   - [use](#use)
@@ -29,7 +28,9 @@
 ## goal 
 Extract legs positions from lidar data, like this: 
 
-[![youtube_presentation](https://img.youtube.com/vi/KcfxU6_UrOo/0.jpg)](https://www.youtube.com/watch?v=KcfxU6_UrOo)
+<!-- [![youtube_presentation](https://img.youtube.com/vi/KcfxU6_UrOo/0.jpg)](https://www.youtube.com/watch?v=KcfxU6_UrOo) -->
+
+<iframe width="560" height="315" src="https://www.youtube.com/embed/KcfxU6_UrOo" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 
 https://www.youtube.com/watch?v=KcfxU6_UrOo
 
