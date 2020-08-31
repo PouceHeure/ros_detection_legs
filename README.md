@@ -8,13 +8,15 @@
 ![tag:language:python3](https://raw.githubusercontent.com/PouceHeure/markdown_tags/v1.0/tags/language/python3/python3_blue.png)
 ![tag:lib:tensorflow](https://raw.githubusercontent.com/PouceHeure/markdown_tags/v1.0/tags/lib/tensorflow/tensorflow_blue.png)
 
-- [ros_detection_legs](#ros_detection_legs)
+- [ros_detection_legs](#ros_detection_legs) 
   - [Goal](#goal)
   - [Use](#use)
     - [Deep-learning](#deep-learning)
       - [prepocessing data](#prepocessing-data)
       - [train model](#train-model)
     - [ROS](#ros)
+      - [compilation packages](#compilation-packages)
+      - [run nodes](#run-nodes)
   - [Architecture](#architecture)
     - [Extract data](#extract-data)
     - [Preprocessing data](#preprocessing-data)
@@ -53,27 +55,36 @@ $ python3 src/training.py
 
 ### ROS
 
-1. compile package
-```
-# inside your ros workingspace
-$ catkin build ros_detection_legs
-```
+#### compilation packages 
 
-2. run [detector_node](./nodes/detecor_node.py) 
 ```
-# source devel before
-$ rosrun ros_detection_legs detector_node.py
-```
-
-3. use [ros_pygame_radar2D](https://github.com/PouceHeure/ros_pygame_radar_2D)
-```
-# clone project to workspace
+# clone 'ros_pygame_radar_2D' to your workspace
 $ git clone https://github.com/PouceHeure/ros_pygame_radar_2D
 
 # compile package 
 $ catkin build ros_pygame_radar_2D
+```
 
-# run radar_node.py 
+```
+# git 'ros_detection_legs' (this pkg) to your workspace
+$ git clone https://github.com/PouceHeure/ros_detection_legs
+
+# inside your ros workingspace
+$ catkin build ros_detection_legs
+```
+
+#### run nodes 
+
+:warning: source devel before
+
+
+1. run [detector_node](./nodes/detecor_node.py) 
+```
+$ rosrun ros_detection_legs detector_node.py
+```
+
+2. use [ros_pygame_radar2D](https://github.com/PouceHeure/ros_pygame_radar_2D)
+```# run radar_node.py 
 $ rosrun ros_pygame_radar_2D radar_node.py
 ```
 
