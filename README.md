@@ -8,33 +8,34 @@
 ![tag:language:python3](https://raw.githubusercontent.com/PouceHeure/markdown_tags/v1.0/tags/language/python3/python3_blue.png)
 ![tag:lib:tensorflow](https://raw.githubusercontent.com/PouceHeure/markdown_tags/v1.0/tags/lib/tensorflow/tensorflow_blue.png)
 
-- [ros_detection_legs](#ros_detection_legs) 
-  - [Goal](#goal)
-  - [Use](#use)
-    - [Deep-learning](#deep-learning)
+
+- [ros_detection_legs](#ros_detection_legs)
+  - [goal](#goal)
+  - [use](#use)
+    - [deep-learning](#deep-learning)
       - [prepocessing data](#prepocessing-data)
       - [train model](#train-model)
-    - [ROS](#ros)
+    - [ros](#ros)
       - [compilation packages](#compilation-packages)
       - [run nodes](#run-nodes)
-  - [Architecture](#architecture)
-    - [Extract data](#extract-data)
-    - [Preprocessing data](#preprocessing-data)
+  - [architecture](#architecture)
+    - [extract data](#extract-data)
+    - [preprocessing data](#preprocessing-data)
       - [segmentation](#segmentation)
       - [raise positive data](#raise-positive-data)
-    - [Training](#training)
-    - [Prediction](#prediction)
+    - [training](#training)
+    - [prediction](#prediction)
 
-## Goal 
+## goal 
 Extract legs positions from lidar data, like this: 
 
 [![youtube_presentation](https://img.youtube.com/vi/KcfxU6_UrOo/0.jpg)](https://www.youtube.com/watch?v=KcfxU6_UrOo)
 
 https://www.youtube.com/watch?v=KcfxU6_UrOo
 
-## Use
+## use
 
-### Deep-learning
+### deep-learning
 
 :warning: a model is already trained, saved in **./model/** folder 
 :pencil: if you want to change some parameters, please update [./src/ros_detection_legs/deep_learning/config/parameters.json](./src/ros_detection_legs/deep_learning/config/parameters.json)
@@ -53,7 +54,7 @@ run training script:
 $ python3 src/training.py 
 ```
 
-### ROS
+### ros
 
 #### compilation packages 
 
@@ -88,16 +89,16 @@ $ rosrun ros_detection_legs detector_node.py
 $ rosrun ros_pygame_radar_2D radar_node.py
 ```
 
-## Architecture
+## architecture
 
-### Extract data
+### extract data
 - package: **ros_lidar_recorder** https://github.com/PouceHeure/ros_lidar_recorder
 - data labeling tool: **lidar_tool_label** https://github.com/PouceHeure/lidar_tool_label
 - dataset: https://github.com/PouceHeure/dataset_lidar2D_legs
 
 ![graph_data_acquisition](.doc/graph/data_acquisition.png)
 
-### Preprocessing data
+### preprocessing data
 
 This schema defines princpals steps: 
 
@@ -177,13 +178,13 @@ size_{dataset\_final} = size_{dataset\_initial} + N * size_{positive\_data}
 $ --> <img style="transform: translateY(0.25em);" src=".doc/equation/transformation/C48mkl3bJQ.svg"/>
 
 
-### Training 
+### training 
 
 model used: RNN with LSTM cells. 
 
 more information about LSTM: https://www.tensorflow.org/api_docs/python/tf/keras/layers/LSTM
 
-### Prediction
+### prediction
 
 A ros node, **detector_node** subscribes to **/scan** topic. Once data are pusblished to this topic, the node uses the training model to predict legs positions. Legs positions are published to **/radar** topic. 
 
