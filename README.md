@@ -139,11 +139,11 @@ $ --> <img style="transform: translateY(0.25em);" src=".doc/equation/label_defin
 <!-- $
 label_{cluster_i} =  \left\{
     \begin{array}{ll}
-        1 & average\_label_{cluster_i} >= tolerance \\
+        1 & average\_label_{cluster_i} >= limit\_cluster\_valid \\
         0 & \text{else}
     \end{array}
 \right.
-$ --> <img style="transform: translateY(0.25em);" src=".doc/equation/label_definition/2YafVPDo7f.svg"/>
+$ --> <img style="transform: translateY(0.25em);" src=".doc/equation/label_definition/uWssGgYcJR.svg"/>
 
 ![graph_segmenation](.doc/graph/segmentation.png)
 
