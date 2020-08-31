@@ -36,7 +36,7 @@ https://www.youtube.com/watch?v=KcfxU6_UrOo
 
 ### Deep-learning
 
-:warning: a model is already training, saved in **./model/** folder 
+:warning: a model is already trained, saved in **./model/** folder 
 :pencil: if you want to change some parameters, please update [./src/ros_detection_legs/deep_learning/config/parameters.json](./src/ros_detection_legs/deep_learning/config/parameters.json)
 #### prepocessing data
 
