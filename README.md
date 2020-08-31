@@ -122,6 +122,8 @@ We can raise positive data by applying a rotation on these data.
 
 ![graph_raising](.doc/graph/raising.png)
 
+All positive
+
 The transformation is done by this expression: 
 
 ![eq_raising](.doc/equation/eq_transformation.svg)
