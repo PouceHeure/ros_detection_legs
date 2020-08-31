@@ -141,11 +141,18 @@ The transformation is done by this expression:
  
 So at after transformation, if we have $N$ transformations
 
-$size_{dataset\_initial} = card(dataset_{initial})$
 
-$size_{positive\_data} = card(dataset_{initial} \text{where y == 1})$
+<!-- $
+size_{dataset\_initial} = card(dataset_{initial})
+$ --> <img style="transform: translateY(0.25em);" src=".doc/equation/tranformation/ck675XtbLJ.svg"/>
 
-$size_{dataset\_final} = size_{dataset\_initial} + N * size_{positive\_data}$
+<!-- $
+size_{positive\_data} = card(dataset_{initial} \text{where y == 1})
+$ --> <img style="transform: translateY(0.25em);" src=".doc/equation/tranformation/hxiBg4rXbC.svg"/>
+
+<!-- $
+size_{dataset\_final} = size_{dataset\_initial} + N * size_{positive\_data}
+$ --> <img style="transform: translateY(0.25em);" src=".doc/equation/tranformation/C48mkl3bJQ.svg"/>
 
 
 ### Training 
