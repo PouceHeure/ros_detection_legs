@@ -17,6 +17,8 @@
   <exec_depend>rospy</exec_depend>
   <exec_depend>sensor_msgs</exec_depend>
 
+  <build_depend>ros_pygame_radar_2D</build_depend>
+  <exec_depend>ros_pygame_radar_2D</exec_depend>
 
   <!-- The export tag contains other, unspecified, tags -->
   <export>
