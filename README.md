@@ -19,6 +19,7 @@
     - [Extract data](#extract-data)
     - [Preprocessing data](#preprocessing-data)
       - [segmentation](#segmentation)
+      - [raise positive data](#raise-positive-data)
     - [Training](#training)
     - [Prediction](#prediction)
 
@@ -113,6 +114,18 @@ Once expressions are defined, we have to define hyper-parameters:
 - **limit_radius**
 
 ![graph_segmenation](.doc/graph/segmentation.png)
+
+
+#### raise positive data 
+
+We can raise positive data with applying a rotation on these data. 
+
+![graph_raising](.doc/graph/raising.png)
+
+The transformation is done by this expression: 
+
+![eq_raising](.doc/equation/eq_transformation.svg)
+ 
 
 ### Training 
 
