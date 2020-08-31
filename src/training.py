@@ -1,12 +1,16 @@
 import os 
 import csv
 import numpy as np 
+from shutil import copyfile
 
 # import deep learning 
 
 from sklearn.model_selection import train_test_split
 import tensorflow as tf 
 from tensorflow import keras 
+
+# import settings 
+
 from ros_detection_legs.deep_learning.config import loader
 
 # paths 
@@ -14,6 +18,9 @@ from ros_detection_legs.deep_learning.config import loader
 PATH_FILE_CURRENT = os.path.dirname(os.path.realpath(__file__))
 PATH_FOLDER_DATA = os.path.join(PATH_FILE_CURRENT,"../data/")
 PATH_FOLDER_DATA_PROCESSED = os.path.join(PATH_FOLDER_DATA,"processed/")
+
+PATH_FOLDER_MODEL_TRAIN = os.path.join(PATH_FILE_CURRENT,"../model","train")
+PATH_FILE_PARAMETERS = os.path.join(PATH_FILE_CURRENT,"../src/ros_detection_legs/deep_learning/config/parameters.json")
 
 def load_data_from_csv(file_path,length_fill = 30): 
     X = []
@@ -39,7 +46,8 @@ if __name__ == "__main__":
 
     X_train, X_valid, y_train, y_valid = train_test_split(X_train_full,y_train_full)
 
-    cb_early_stopping = tf.keras.callbacks.EarlyStopping(patience=config_training["patience"],restore_best_weights=True)
+    cb_early_stopping = tf.keras.callbacks.EarlyStopping(patience=config_training["patience"]
+                                                        ,restore_best_weights=True)
 
     model = keras.models.Sequential([
         keras.layers.RNN(keras.layers.LSTMCell(20),return_sequences=True,input_shape=[None,2]),
@@ -57,7 +65,9 @@ if __name__ == "__main__":
             ,batch_size=32
             ,callbacks=[cb_early_stopping])
 
-    model.save(os.path.join(PATH_FILE_CURRENT,"../model","train"))
+
+    model.save(PATH_FOLDER_MODEL_TRAIN)
+    copyfile(PATH_FILE_PARAMETERS, os.path.join(PATH_FOLDER_MODEL_TRAIN,"parameters.json"))
 
     index_select = 0
     length = 10
