@@ -139,6 +139,14 @@ The transformation is done by this expression:
 
 ![eq_raising](.doc/equation/eq_transformation.svg)
  
+So at after transformation, if we have $N$ transformations
+
+$size_{dataset\_initial} = card(dataset_{initial})$
+
+$size_{positive\_data} = card(dataset_{initial} \text{where y == 1})$
+
+$size_{dataset\_final} = size_{dataset\_initial} + N * size_{positive\_data}$
+
 
 ### Training 
 
