@@ -113,16 +113,37 @@ Before segmentation, we have to found a way how to compute a distance between 2 
 
 - Second approach, find a general expression from polar point to cartesien distance. 
 
-![distance(p1,p2) = \sqrt{r_1^2*r_2^2 - 2*_1*r_2*cos(\theta_1-\theta_2)}](.doc/equation/eq_distance.svg)
+<!-- $
+distance(p1,p2) = \sqrt{r_1^2*r_2^2 - 2*_1*r_2*cos(\theta_1-\theta_2)}
+$ --> <img style="transform: translateY(0.25em);" src=".doc/equation/distance/VE9553nyWt.svg"/>
+
 
 A second distance is computed: 
 
-![distance_{radius}(p1,p2) = abs(r_1 - r_2)](.doc/equation/eq_distance_radius.svg)
+<!-- $
+distance_{radius}(p1,p2) = abs(r_1 - r_2)
+$ --> <img style="transform: translateY(0.25em);" src=".doc/equation/distance_radius/9VFuqCi7K1.svg"/>
+
 
 Once expressions are defined, we have to define hyper-parameters:  
 
 - **limit_distance** 
 - **limit_radius**
+
+After segmentation, we have to attach a label to each cluster. For this one, we define **limit_cluster_valid**. 
+
+<!-- $
+average\_label_{cluster_i} = \frac{card(points_{cluster_i} \text{where point == selected)}}{card(points_{cluster_i})}
+$ --> <img style="transform: translateY(0.25em);" src=".doc/equation/label_definition/RdtwNciQva.svg"/>
+
+<!-- $
+label_{cluster_i} =  \left\{
+    \begin{array}{ll}
+        1 & average\_label_{cluster_i} >= tolerance \\
+        0 & \text{else}
+    \end{array}
+\right.
+$ --> <img style="transform: translateY(0.25em);" src=".doc/equation/label_definition/2YafVPDo7f.svg"/>
 
 ![graph_segmenation](.doc/graph/segmentation.png)
 
@@ -137,22 +158,23 @@ All positive clusters are selected, on each cluster the same tranformation is ap
 
 The transformation is done by this expression: 
 
-![eq_raising](.doc/equation/eq_transformation.svg)
+<!-- $
+\theta' = \theta + \theta_{transformation}
+$ --> <img style="transform: translateY(0.25em);" src=".doc/equation/transformation/gZTVMPSyj7.svg"/>
  
 So at after transformation, if we have *N* transformations
 
-
 <!-- $
 size_{dataset\_initial} = card(dataset_{initial})
-$ --> <img style="transform: translateY(0.25em);" src=".doc/equation/tranformation/ck675XtbLJ.svg"/>
+$ --> <img style="transform: translateY(0.25em);" src=".doc/equation/transformation/ck675XtbLJ.svg"/>
 
 <!-- $
 size_{positive\_data} = card(dataset_{initial} \text{where y == 1})
-$ --> <img style="transform: translateY(0.25em);" src=".doc/equation/tranformation/hxiBg4rXbC.svg"/>
+$ --> <img style="transform: translateY(0.25em);" src=".doc/equation/transformation/hxiBg4rXbC.svg"/>
 
 <!-- $
 size_{dataset\_final} = size_{dataset\_initial} + N * size_{positive\_data}
-$ --> <img style="transform: translateY(0.25em);" src=".doc/equation/tranformation/C48mkl3bJQ.svg"/>
+$ --> <img style="transform: translateY(0.25em);" src=".doc/equation/transformation/C48mkl3bJQ.svg"/>
 
 
 ### Training 
