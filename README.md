@@ -118,7 +118,7 @@ Once expressions are defined, we have to define hyper-parameters:
 
 #### raise positive data 
 
-We can raise positive data with applying a rotation on these data. 
+We can raise positive data by applying a rotation on these data. 
 
 ![graph_raising](.doc/graph/raising.png)
 
