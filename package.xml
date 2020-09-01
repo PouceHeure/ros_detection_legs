@@ -4,10 +4,8 @@
   <version>0.0.0</version>
   <description>The ros_detection_legs package</description>
 
-  <maintainer email="hugo@todo.todo">hugo</maintainer>
-
-
-  <license>TODO</license>
+  <maintainer email="hugo.pousseur@gmail.com">PouceHeure</maintainer>
+  <license>Apache 2.0</license>
 
   <buildtool_depend>catkin</buildtool_depend>
   <build_depend>rospy</build_depend>
