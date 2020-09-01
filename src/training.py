@@ -50,8 +50,9 @@ if __name__ == "__main__":
                                                         ,restore_best_weights=True)
 
     model = keras.models.Sequential([
-        keras.layers.RNN(keras.layers.LSTMCell(20),return_sequences=True,input_shape=[None,2]),
-        keras.layers.RNN(keras.layers.LSTMCell(20)),
+        keras.layers.RNN(keras.layers.LSTMCell(10),return_sequences=True,input_shape=[None,2]),
+        keras.layers.RNN(keras.layers.LSTMCell(10),return_sequences=True),
+        keras.layers.RNN(keras.layers.LSTMCell(10)),
         keras.layers.Dense(1,activation="sigmoid")
     ])
 
@@ -59,7 +60,7 @@ if __name__ == "__main__":
                 ,optimizer="adam"
                 ,metrics=["accuracy"])
 
-    model.fit(X_train,y_train
+    history = model.fit(X_train,y_train
             ,validation_data=(X_valid,y_valid)
             ,epochs=config_training["epochs"]
             ,batch_size=32
@@ -69,10 +70,16 @@ if __name__ == "__main__":
     model.save(PATH_FOLDER_MODEL_TRAIN)
     copyfile(PATH_FILE_PARAMETERS, os.path.join(PATH_FOLDER_MODEL_TRAIN,"parameters.json"))
 
-    index_select = 0
+    index_selected = 0
     length = 10
-    X_test = np.array(X_valid[index_select:index_select+length])
-    print(y_valid[index_select:index_select+length])
+    X_test = np.array(X_valid[index_selected:index_selected+length])
+    print(y_valid[index_selected:index_selected+length])
     print(model.predict(X_test))
 
+    import matplotlib.pyplot as plt
+    import pandas as pd
+    pd.DataFrame(history.history).plot(figsize=(8, 5))
+    plt.grid(True)
+    plt.gca().set_ylim(0, 1)
+    plt.savefig(os.path.join(PATH_FOLDER_MODEL_TRAIN,"evaluation.png"))
 

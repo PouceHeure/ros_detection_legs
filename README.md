@@ -23,6 +23,7 @@
       - [segmentation](#segmentation)
       - [increase positive data](#increase-positive-data)
     - [training](#training)
+      - [information about the current model](#information-about-the-current-model)
     - [prediction](#prediction)
 
 ## goal 
@@ -195,6 +196,15 @@ $ --> <img style="transform: translateY(0.25em);" src=".doc/equation/transformat
 model used: RNN with LSTM cells. 
 
 more information about LSTM: https://www.tensorflow.org/api_docs/python/tf/keras/layers/LSTM
+
+
+#### information about the current model
+
+settings: [model/train/parameters.json](model/train/parameters.json)
+
+learning curves: 
+
+![evaluation_graphic](model/train/evaluation.png)
 
 ### prediction
 
