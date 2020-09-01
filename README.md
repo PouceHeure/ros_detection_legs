@@ -99,6 +99,8 @@ $ catkin build
 $ rosrun rqt_reconfigure rqt_reconfigure
 ```
 
+![screen-rqt_dyn](.doc/img/screen-rqt_dyn.png)
+
 ## architecture
 
 ### extract data
@@ -203,3 +205,19 @@ A ros node, **detector_node** subscribes to **/scan** topic. Once data are pusbl
 Like the training, data need to be tranformed. So before prediction clusters are created, directly in the subscriber callback function. 
 
 ![graph_prediction](.doc/graph/prediction.png)
+
+Define the center point of positive clusters: 
+
+![graph_locate_center_point](./doc/../.doc/graph/locate_center_point.png)
+
+Coordinate of the center of the cluster *j* are:
+
+<!-- $
+\theta_{j_{center}} = \frac{1}{card(points_j)}\sum_{i} \theta_{i}
+$ --> <img style="transform: translateY(0.25em);" src=".doc/equation/center/hBFtPnjogX.svg"/>
+
+<br/>
+
+<!-- $
+r_{j_{center}} = \frac{1}{card(points_j)}\sum_{i} r_{i}
+$ --> <img style="transform: translateY(0.25em);" src=".doc/equation/center/WifGokqCvm.svg"/>
