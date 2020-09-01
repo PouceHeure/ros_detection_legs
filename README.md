@@ -30,7 +30,6 @@ Extract legs positions from lidar data, like this:
 
 [![youtube_presentation](./.doc/img/screen-video.png)](https://www.youtube.com/watch?v=KcfxU6_UrOo)
 
- 
 https://www.youtube.com/watch?v=KcfxU6_UrOo
 
 ## use
@@ -41,7 +40,7 @@ https://www.youtube.com/watch?v=KcfxU6_UrOo
 :pencil: if you want to change some parameters, please update [./src/ros_detection_legs/deep_learning/config/parameters.json](./src/ros_detection_legs/deep_learning/config/parameters.json)
 #### prepocessing data
 
-run prepocessing script: 
+run prepocessing script:
 ```
 $ python3 src/preprocessing.py
 ```
@@ -87,6 +86,17 @@ $ rosrun ros_detection_legs detector_node.py
 2. use [ros_pygame_radar2D](https://github.com/PouceHeure/ros_pygame_radar_2D)
 ```# run radar_node.py 
 $ rosrun ros_pygame_radar_2D radar_node.py
+```
+
+3. update parameters, some parameters about model are dynamically reconfigurable. By default dynamic reconfigure load settings save in parameters.json, don't forget to recompile the project if you change parameters.json !!!
+- compile cfg and generate new configuration file: 
+```
+# update parameters.json 
+$ catkin build 
+```
+- update parameters dynamically: 
+```
+$ rosrun rqt_reconfigure rqt_reconfigure
 ```
 
 ## architecture

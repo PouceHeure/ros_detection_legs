@@ -20,6 +20,9 @@
   <build_depend>ros_pygame_radar_2D</build_depend>
   <exec_depend>ros_pygame_radar_2D</exec_depend>
 
+  <build_depend>dynamic_reconfigure</build_depend>
+  <exec_depend>dynamic_reconfigure</exec_depend>
+
   <!-- The export tag contains other, unspecified, tags -->
   <export>
     <!-- Other tools can request additional information be placed here -->

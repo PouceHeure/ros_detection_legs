@@ -8,16 +8,29 @@ from ros_detection_legs.deep_learning.config import loader
 from ros_pygame_radar_2D.msg import PointPolar, RadarPointCloud
 from sensor_msgs.msg import LaserScan
 
+
+from dynamic_reconfigure.server import Server
+from ros_detection_legs.cfg import HyperParametersConfig
+
+
 class Detector: 
 
-    def __init__(self,topic_scan,topic_radar,model,tolerance=0.90):
+    def __init__(self,topic_scan,topic_radar,model):
         self._model = model 
-        self._config_parameters = loader.load_parameters()["prepocessing"]
-        self._tolerance = tolerance
-        self._sub = rospy.Subscriber(topic_scan, LaserScan, self.callback, queue_size=10)
+        self._sub = rospy.Subscriber(topic_scan, LaserScan, self._callback_laserscan, queue_size=10)
         self._pub = rospy.Publisher(topic_radar, RadarPointCloud, queue_size=10)
+        
+        self._srv = Server(HyperParametersConfig, self._callback_reconfigure)
+        self._config_parameters = self._srv.config
 
-    def callback(self,data):
+    def _callback_reconfigure(self, config, level):
+        self._config_parameters = config
+        return config
+
+    def _callback_laserscan(self,data):
+        if(self._config_parameters == None): 
+            rospy.loginfo("waiting configuration")
+            return
         # get points 
         angle_min = data.angle_min
         angle_increment = data.angle_increment
