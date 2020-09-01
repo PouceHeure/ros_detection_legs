@@ -21,7 +21,7 @@
     - [extract data](#extract-data)
     - [preprocessing data](#preprocessing-data)
       - [segmentation](#segmentation)
-      - [raise positive data](#raise-positive-data)
+      - [increase positive data](#increase-positive-data)
     - [training](#training)
     - [prediction](#prediction)
 
@@ -88,7 +88,7 @@ $ rosrun ros_detection_legs detector_node.py
 $ rosrun ros_pygame_radar_2D radar_node.py
 ```
 
-3. update parameters, some parameters about model are dynamically reconfigurable. By default dynamic reconfigure load settings save in parameters.json, don't forget to recompile the project if you change parameters.json !!!
+3. update parameters, some parameters about model are dynamically reconfigurable. By default **dynamic_reconfigure** loads settings save in parameters.json, don't forget to recompile the project if you change parameters.json !
 - compile cfg and generate new configuration file: 
 ```
 # update parameters.json 
@@ -122,9 +122,9 @@ We can create clusters with a segmentation method, by this way data will gatheri
 
 Before segmentation, we have to found a way how to compute a distance between 2 polar points. 
 
-- First approach, convert all polar points to cartesien and apply a classic norm. 
+- First approach, convert all polar points to cartesien and apply a classic norm, but the complexity of this method is too high. 
 
-- Second approach, find a general expression from polar point to cartesien distance. 
+- Second approach, find a general expression from polar point to cartesian distance. 
 
 <!-- $
 distance(p1,p2) = \sqrt{r_1^2*r_2^2 - 2*_1*r_2*cos(\theta_1-\theta_2)}
@@ -161,9 +161,9 @@ $ --> <img style="transform: translateY(0.25em);" src=".doc/equation/label_defin
 ![graph_segmenation](.doc/graph/segmentation.png)
 
 
-#### raise positive data 
+#### increase positive data 
 
-We can raise positive data by applying a rotation on these data. 
+We can increase positive data by applying a rotation on these data. 
 
 ![graph_raising](.doc/graph/raising.png)
 
@@ -202,7 +202,7 @@ A ros node, **detector_node** subscribes to **/scan** topic. Once data are pusbl
 
 ![graph_prediction](.doc/graph/prediction_ros.png)
 
-Like the training, data need to be tranformed. So before prediction clusters are created, directly in the subscriber callback function. 
+Like the training, data need to be tranformed. So before prediction, clusters are created directly in the subscriber callback function. 
 
 ![graph_prediction](.doc/graph/prediction.png)
 
