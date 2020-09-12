@@ -12,7 +12,7 @@
   - [goal](#goal)
   - [use](#use)
     - [deep-learning](#deep-learning)
-      - [prepocessing data](#prepocessing-data)
+      - [preprocessing data](#preprocessing-data)
       - [train model](#train-model)
     - [ros](#ros)
       - [compilation packages](#compilation-packages)
@@ -39,9 +39,9 @@ https://www.youtube.com/watch?v=KcfxU6_UrOo
 
 :warning: a model is already trained, saved in **./model/** folder 
 :pencil: if you want to change some parameters, please update [./src/ros_detection_legs/deep_learning/config/parameters.json](./src/ros_detection_legs/deep_learning/config/parameters.json)
-#### prepocessing data
+#### preprocessing data
 
-run prepocessing script:
+run preprocessing script:
 ```
 $ python3 src/preprocessing.py
 ```
