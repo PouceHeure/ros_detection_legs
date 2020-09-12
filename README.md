@@ -18,8 +18,8 @@
       - [compilation packages](#compilation-packages)
       - [run nodes](#run-nodes)
   - [architecture](#architecture)
-    - [extract data](#extract-data)
-    - [preprocessing data](#preprocessing-data)
+    - [data extraction](#data-extraction)
+    - [data preprocessing](#data-preprocessing)
       - [segmentation](#segmentation)
       - [increase positive data](#increase-positive-data)
     - [training](#training)
@@ -89,7 +89,7 @@ $ rosrun ros_detection_legs detector_node.py
 $ rosrun ros_pygame_radar_2D radar_node.py
 ```
 
-3. update parameters, some parameters about model are dynamically reconfigurable. By default **dynamic_reconfigure** loads settings save in parameters.json, don't forget to recompile the project if you change parameters.json !
+3. update parameters, some parameters about model are dynamically reconfigurable. By default **dynamic_reconfigure** loads settings save in parameters.json, don't forget to recompile the project if you change parameters.json (because the **dynamic_reconfigure** generates a .h file from the cfg file) !
 - compile cfg and generate new configuration file: 
 ```
 # update parameters.json 
@@ -104,14 +104,14 @@ $ rosrun rqt_reconfigure rqt_reconfigure
 
 ## architecture
 
-### extract data
+### data extraction
 - package: **ros_lidar_recorder** https://github.com/PouceHeure/ros_lidar_recorder
 - data labeling tool: **lidar_tool_label** https://github.com/PouceHeure/lidar_tool_label
 - dataset: https://github.com/PouceHeure/dataset_lidar2D_legs
 
 ![graph_data_acquisition](.doc/graph/data_acquisition.png)
 
-### preprocessing data
+### data preprocessing
 
 This schema defines princpals steps: 
 
